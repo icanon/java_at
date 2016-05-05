@@ -1,5 +1,8 @@
 package ru.stqa.pft.sandbox;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 /**
  * Created by mac on 01.05.16.
  */
@@ -15,8 +18,11 @@ public class CalcDistance {
 
    public static double distance(Point pPoint1, Point pPoint2){
 
-      return Math.sqrt(Math.pow(pPoint2.x - pPoint1.x, 2) + Math.pow(pPoint2.y - pPoint1.y,2));
+      double dist = Math.sqrt(Math.pow(pPoint2.x - pPoint1.x, 2) + Math.pow(pPoint2.y - pPoint1.y,2));
+       return new BigDecimal(dist).setScale(2, RoundingMode.UP).doubleValue();
 
    }
+
+
 
 }
