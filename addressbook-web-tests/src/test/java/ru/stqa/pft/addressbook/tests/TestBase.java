@@ -7,7 +7,7 @@ import ru.stqa.pft.addressbook.appmanager.ApplicationManager;
 /**
  * Created by mac on 08.05.16.
  */
-public class TastBase {
+public class TestBase {
 
    protected final ApplicationManager app = new ApplicationManager();
 
