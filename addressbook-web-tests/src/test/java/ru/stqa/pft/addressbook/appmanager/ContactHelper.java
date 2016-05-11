@@ -11,8 +11,6 @@ public class ContactHelper  extends HelperBase{
 
    public ContactHelper(FirefoxDriver wd) {
       super(wd);
-
-      this.wd = wd;
    }
 
    public void fillContactForm(ContactData contactData) {
@@ -26,6 +24,25 @@ public class ContactHelper  extends HelperBase{
    public void submitContactCreation() {
       click(By.xpath("//div[@id='content']/form/input[21]"));
 //      wd.findElement().click();
+   }
+
+   public void selectContact() {
+      click(By.name("selected[]"));
+   }
+
+   public void deletedSelectContact(){
+      click(By.xpath("//input[@value='Delete']"));
+   }
+
+   public void initContactModification(){
+      click(By.xpath("(//img[@title='Edit'])[1]"));
+   }
+
+
+   public void updateContactModification(){
+
+      click(By.name("update"));
+
    }
 
 }
