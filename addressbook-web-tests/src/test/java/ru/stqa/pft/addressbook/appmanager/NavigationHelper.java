@@ -14,7 +14,13 @@ public class NavigationHelper extends HelperBase{
    }
 
    public void gotoGroupPage() {
-      click(By.linkText("groups"));
+      if (isElementPresent(By.xpath("//div/h1[contains(text(),'Groups')]")) &&  wd.findElement(By.xpath("//div/h1[contains(text(),'Groups')]")).getText().equals("Groups") && isElementPresent(By.name("new"))) {
+         return;
+      }
+      System.out.println();
+      System.out.println();
+      System.out.println("4e 3a xyin9 ???????????");
+      click(By.linkText("groupssss"));
    }
 
    public void gotoAddNewContactPage() {
@@ -22,6 +28,9 @@ public class NavigationHelper extends HelperBase{
    }
 
    public void gotoHomePage(){
+      if (isElementPresent(By.id("maintable"))){
+         return;
+      }
       click(By.linkText("home"));
    }
 }
