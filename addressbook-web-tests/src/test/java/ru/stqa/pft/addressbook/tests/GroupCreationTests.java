@@ -3,16 +3,13 @@ package ru.stqa.pft.addressbook.tests;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.GroupData;
 
-public class GroupCreationTests extends TestBase{
+public class GroupCreationTests extends TestBase {
 
    @Test
    public void testGroupCreation() {
 
       app.getNavigationHelper().gotoGroupPage();
-      app.getGroupHelper().initGroupCreation();
-      app.getGroupHelper().fillGroupForm(new GroupData("testG1", "testG2", "testG3"));
-      app.getGroupHelper().submitGroupCreation();
-      app.getGroupHelper().returnToGroupPage();
+      app.getGroupHelper().createGroup(new GroupData("testG1", "testG2", "testG3"));
 
    }
 
