@@ -28,8 +28,10 @@ public class NavigationHelper extends HelperBase{
 
    public void gotoHomePage(){
       if (isElementPresent(By.id("maintable"))){
+         System.out.println("выходим из метода если таблица видна");
          return;
       }
+      System.out.println("кликаем на кнопку Хоум");
       click(By.linkText("home"));
    }
 }
