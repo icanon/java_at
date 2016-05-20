@@ -48,10 +48,8 @@ public class HelperBase {
    public boolean isElementPresent (By locator) {
       try {
          wd.findElement(locator);
-         System.out.println("нашел");
          return true;
       } catch (NoSuchElementException ex) {
-         System.out.println("не нашел");
          return false;
       }
    }

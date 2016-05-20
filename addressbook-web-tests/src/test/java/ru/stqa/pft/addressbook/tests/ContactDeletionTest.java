@@ -12,18 +12,11 @@ public class ContactDeletionTest extends TestBase {
    public void testContactDeletion() {
       app.getNavigationHelper().gotoHomePage();
       if (! app.getContactHelper().isThereAContact()) {
-         try { Thread.sleep(2000);
-         }
-         catch (InterruptedException ex) {
-         }
-
-         app.getContactHelper().createContact(new ContactData("Petr", "PetrovvvvVV1111111", "Ch111e", "+777777777777", "ya@ya.ru"));
+         app.getContactHelper().createContact(new ContactData("11111", "11111111", "111111", "+777777777777", "ya@ya.ru"));
       }
       app.getContactHelper().selectContact();
       app.getContactHelper().deletedSelectContact();
       app.getContactHelper().clicAlert();
       app.getNavigationHelper().gotoHomePage();
-
-
    }
 }
