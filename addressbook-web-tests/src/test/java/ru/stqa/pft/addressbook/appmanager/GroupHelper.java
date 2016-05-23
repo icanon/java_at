@@ -1,5 +1,6 @@
 package ru.stqa.pft.addressbook.appmanager;
 
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -47,9 +48,11 @@ public class GroupHelper extends HelperBase {
       click(By.name("edit"));
    }
 
+
    public void submitGroupModification() {
       click(By.name("update"));
    }
+
 
    public void createGroup(GroupData group) {
       initGroupCreation();
@@ -58,14 +61,16 @@ public class GroupHelper extends HelperBase {
       returnToGroupPage();
    }
 
-   public boolean isThereAGroup() {
 
+   public boolean isThereAGroup() {
       return isElementPresent(By.name("selected[]"));
    }
+
 
    public int getGroupCount() {
       return wd.findElements(By.name("selected[]")).size();
    }
+
 
    public List<GroupData> getGroupList() {
       List<GroupData> groups = new ArrayList<GroupData>();
@@ -75,7 +80,8 @@ public class GroupHelper extends HelperBase {
          GroupData group = new GroupData(name, null, null);
          groups.add(group);
       }
-
       return groups;
    }
+
+
 }

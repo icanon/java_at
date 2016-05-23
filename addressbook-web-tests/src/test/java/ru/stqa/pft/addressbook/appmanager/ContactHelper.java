@@ -3,8 +3,12 @@ package ru.stqa.pft.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import ru.stqa.pft.addressbook.model.ContactData;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by mac on 08.05.16.
@@ -42,8 +46,9 @@ public class ContactHelper  extends HelperBase{
       click(By.xpath("//input[@value='Delete']"));
    }
 
-   public void initContactModification(){
-      click(By.xpath("(//img[@title='Edit'])[1]"));
+   public void initContactModification(int before){
+//      wd.findElement(By.xpath("(//img[@title='Edit'])[1]")).get
+      click(By.xpath("(//img[@title='Edit'])["+ before +"]"));
    }
 
 
@@ -68,6 +73,17 @@ public class ContactHelper  extends HelperBase{
    }
 
    public int getContactCount() {
-      return wd.findElements(By.name("selected[]")).size();
+       return wd.findElements(By.name("selected[]")).size();
+   }
+
+   public List<ContactData> getContactList() {
+      List<ContactData> contacts = new ArrayList<ContactData>();
+      List<WebElement> elements = wd.findElements(By.name("entry"));
+      for (WebElement element : elements ) {
+         String lastName = element.getText();
+         ContactData contact = new ContactData(null, lastName, null, null, null);
+         contacts.add(contact);
+      }
+      return contacts;
    }
 }
