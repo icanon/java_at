@@ -8,9 +8,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 
-/**
- * Created by i.sokolov on 10.05.2016.
- */
+
 public class GroupModificationTests extends TestBase {
 
    @Test
@@ -18,7 +16,7 @@ public class GroupModificationTests extends TestBase {
 
       app.getNavigationHelper().gotoGroupPage();
       if (! app.getGroupHelper().isThereAGroup()){
-         app.getGroupHelper().createGroup(new GroupData("testG1111", "testG2", null));
+         app.getGroupHelper().createGroup(new GroupData("cG1111", "cG2222", null));
       }
       List<GroupData> before = app.getGroupHelper().getGroupList();
       app.getGroupHelper().selectGroup(before.size() - 1);

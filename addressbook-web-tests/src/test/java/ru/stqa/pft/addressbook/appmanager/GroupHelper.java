@@ -1,6 +1,5 @@
 package ru.stqa.pft.addressbook.appmanager;
 
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,9 +8,7 @@ import ru.stqa.pft.addressbook.model.GroupData;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by mac on 08.05.16.
- */
+
 public class GroupHelper extends HelperBase {
 
    public GroupHelper(WebDriver wd) {
@@ -77,7 +74,7 @@ public class GroupHelper extends HelperBase {
       List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
       for (WebElement element : elements) {
          String name = element.getText();
-         String id = element.findElement(By.tagName("input")).getAttribute("value");
+         int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
          GroupData group = new GroupData(id, name, null, null);
          groups.add(group);
       }
