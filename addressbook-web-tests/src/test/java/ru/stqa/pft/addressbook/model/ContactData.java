@@ -34,4 +34,12 @@ public class ContactData {
    public String getEmail() {
       return email;
    }
+
+   @Override
+   public String toString() {
+      return "ContactData{" +
+              "firstName='" + firstName + '\'' +
+              ", lastName='" + lastName + '\'' +
+              '}';
+   }
 }
