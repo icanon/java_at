@@ -22,7 +22,7 @@ public class ContactModificationTest extends TestBase {
       }
       List<ContactData> before = app.getContactHelper().getContactList();
       app.getContactHelper().initContactModification(before.size());
-      ContactData contact = new ContactData(before.get(before.size()).getId(), "f222", "l2222", "22222", "+799999999999", "222222@2222.ru");
+      ContactData contact = new ContactData(before.get(before.size() - 1).getId(), "f222", "l2222", "22222", "+799999999999", "222222@2222.ru");
       app.getContactHelper().fillContactForm(contact);
       app.getContactHelper().updateContactModification();
       app.getNavigationHelper().gotoHomePage();
