@@ -18,7 +18,7 @@ public class ContactDeletionTest extends TestBase {
       app.goTo().homePage();
       if (app.сontact().list().size() == 0) {
          app.сontact().
-                 create(new ContactData(null, "11111111", "111111", "+777777777777", "ya@ya.ru"));
+                 create(new ContactData().withFirstName("firstName1"));
       }
    }
 

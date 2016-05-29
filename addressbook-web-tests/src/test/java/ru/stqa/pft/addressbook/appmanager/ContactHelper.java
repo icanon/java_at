@@ -5,7 +5,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import ru.stqa.pft.addressbook.model.ContactData;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by mac on 08.05.16.
@@ -98,10 +100,24 @@ public class ContactHelper  extends HelperBase{
          String lastname = element.findElement(By.xpath("td[2]")).getText();
          String firstname = element.findElement(By.xpath("td[3]")).getText();
          int id = Integer.parseInt(element.findElement(By.xpath("*/input[@name='selected[]']")).getAttribute("value"));
-         ContactData contact = new ContactData(id, firstname, lastname, null, null, null);
+         ContactData contact = new ContactData().withId(id).withFirstName(firstname).withLastName(lastname);
          contacts.add(contact);
       }
       return contacts;
    }
+
+   public Set<ContactData> all() {
+      Set<ContactData> contacts = new HashSet<ContactData>();
+      List<WebElement> elements = wd.findElements(By.name("entry"));
+      for (WebElement element : elements) {
+         String lastname = element.findElement(By.xpath("td[2]")).getText();
+         String firstname = element.findElement(By.xpath("td[3]")).getText();
+         int id = Integer.parseInt(element.findElement(By.xpath("*/input[@name='selected[]']")).getAttribute("value"));
+         ContactData contact = new ContactData().withId(id).withFirstName(firstname).withLastName(lastname);
+         contacts.add(contact);
+      }
+      return contacts;
+   }
+
 }
 
