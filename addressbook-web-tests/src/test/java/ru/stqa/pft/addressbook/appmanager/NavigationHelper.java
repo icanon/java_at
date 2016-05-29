@@ -13,7 +13,7 @@ public class NavigationHelper extends HelperBase{
       super(wd);
    }
 
-   public void gotoGroupPage() {
+   public void groupPage() {
       if (isElementPresent(By.xpath("//div/h1[contains(text(),'Groups')]"))
               &&  wd.findElement(By.xpath("//h1[contains(text(),'Groups')]")).getText().equals("Groups")
               && isElementPresent(By.name("new"))) {
@@ -26,7 +26,7 @@ public class NavigationHelper extends HelperBase{
       click(By.linkText("add new"));
    }
 
-   public void gotoHomePage(){
+   public void homePage(){
       if (isElementPresent(By.id("maintable"))){
          return;
       }
