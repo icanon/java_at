@@ -18,7 +18,6 @@ public class GroupModificationTests extends TestBase {
       if (app.group().list().size() == 0){
          app.group().create(new GroupData("cG1111", "cG2222", null));
       }
-
    }
 
 

@@ -23,7 +23,6 @@ public class ContactModificationTest extends TestBase {
       }
    }
 
-
    @Test
    public void testContactModification() {
 

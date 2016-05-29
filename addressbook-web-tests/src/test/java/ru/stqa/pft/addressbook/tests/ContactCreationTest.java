@@ -16,11 +16,10 @@ public class ContactCreationTest extends TestBase {
       List<ContactData> before = app.сontact().list();
       ContactData contact = new ContactData("1111", "111111", "111111", "+777777777777", "111@111.ru");
       app.сontact().create(contact);
+
       List<ContactData> after = app.сontact().list();
       Assert.assertEquals(after.size(), before.size() + 1);
-
       before.add(contact);
-
       Comparator<? super ContactData> byId = (o1, o2) -> Integer.compare(o1.getId(), o2.getId());
       before.sort(byId);
       after.sort(byId);
