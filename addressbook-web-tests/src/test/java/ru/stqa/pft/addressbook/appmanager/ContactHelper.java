@@ -32,6 +32,13 @@ public class ContactHelper  extends HelperBase{
       clicAlert();
    }
 
+
+   public void delete(ContactData contact) {
+      selectContactById(contact.getId());
+      deletedSelectContact();
+      clicAlert();
+   }
+
    public void returnToHomePage() {
       click(By.linkText("home page"));
    }
@@ -51,6 +58,11 @@ public class ContactHelper  extends HelperBase{
 
    public void selectContact(int index) {
       wd.findElements(By.name("selected[]")).get(index).click();
+   }
+
+
+   private void selectContactById(int id) {
+      wd.findElement(By.id(""+id+"")).click();
    }
 
    public void deletedSelectContact(){
@@ -107,17 +119,19 @@ public class ContactHelper  extends HelperBase{
    }
 
    public Set<ContactData> all() {
+//      List<ContactData> contacts = new ArrayList<ContactData>();
       Set<ContactData> contacts = new HashSet<ContactData>();
       List<WebElement> elements = wd.findElements(By.name("entry"));
       for (WebElement element : elements) {
          String lastname = element.findElement(By.xpath("td[2]")).getText();
          String firstname = element.findElement(By.xpath("td[3]")).getText();
          int id = Integer.parseInt(element.findElement(By.xpath("*/input[@name='selected[]']")).getAttribute("value"));
-         ContactData contact = new ContactData().withId(id).withFirstName(firstname).withLastName(lastname);
-         contacts.add(contact);
+         ContactData con = new ContactData().withLastName(lastname).withFirstName(firstname).withId(id);
+         contacts.add(con);
       }
       return contacts;
-   }
 
+//      return new HashSet<ContactData>();
+   }
 }
 
