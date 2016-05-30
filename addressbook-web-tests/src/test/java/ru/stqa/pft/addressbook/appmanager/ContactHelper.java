@@ -9,9 +9,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-/**
- * Created by mac on 08.05.16.
- */
+
 public class ContactHelper  extends HelperBase{
 
 
@@ -21,26 +19,19 @@ public class ContactHelper  extends HelperBase{
 
       super(wd);
       navigationHelper = new NavigationHelper(wd);
-
    }
 
-
-
-   public void delete(int index) {
-      selectContact(index);
-      deletedSelectContact();
-      clicAlert();
-   }
 
 
    public void delete(ContactData contact) {
       selectContactById(contact.getId());
       deletedSelectContact();
       clicAlert();
+      returnToHomePage();
    }
 
    public void returnToHomePage() {
-      click(By.linkText("home page"));
+      click(By.linkText("home"));
    }
 
    public void fillContactForm(ContactData contactData) {
@@ -56,10 +47,6 @@ public class ContactHelper  extends HelperBase{
 //      wd.findElement().click();
    }
 
-   public void selectContact(int index) {
-      wd.findElements(By.name("selected[]")).get(index).click();
-   }
-
 
    private void selectContactById(int id) {
       wd.findElement(By.id(""+id+"")).click();
@@ -70,10 +57,15 @@ public class ContactHelper  extends HelperBase{
    }
 
    public void initContactModification(int before){
-//      wd.findElement(By.xpath("(//img[@title='Edit'])[1]")).get
       click(By.xpath("(//img[@title='Edit'])[" + before + "]"));
    }
 
+   private void initContactModificationById(int id) {
+      click(By.xpath("//td[@class='center' and preceding-sibling::td[@class='center']/input[@id="+id+"]]/a/img[@title='Edit']"));
+//      click(By.xpath("(//img[@title='Edit'])[" + id + "]"));
+
+      //td[@class="center" and preceding-sibling::td[@class="center"]/input[@id="59"]]/a/img[@title="Edit"]
+   }
 
    public void updateContactModification(){
 
@@ -86,16 +78,18 @@ public class ContactHelper  extends HelperBase{
       navigationHelper.gotoAddNewContactPage();
       fillContactForm(contact);
       submitContactCreation();
-      navigationHelper.homePage();
+      returnToHomePage();
    }
 
 
-   public void modify(int index, ContactData contact) {
-    initContactModification(index);
+   public void modify(ContactData contact) {
+    initContactModificationById(contact.getId());
     fillContactForm(contact);
     updateContactModification();
-    navigationHelper.homePage();
+    returnToHomePage();
    }
+
+
 
    public boolean isThereAContact() {
       return isElementPresent(By.name("selected[]"));
@@ -111,7 +105,7 @@ public class ContactHelper  extends HelperBase{
       for (WebElement element : elements) {
          String lastname = element.findElement(By.xpath("td[2]")).getText();
          String firstname = element.findElement(By.xpath("td[3]")).getText();
-         int id = Integer.parseInt(element.findElement(By.xpath("*/input[@name='selected[]']")).getAttribute("value"));
+         int id = Integer.parseInt(element.findElement(By.xpath("/*input[@name='selected[]']")).getAttribute("value"));
          ContactData contact = new ContactData().withId(id).withFirstName(firstname).withLastName(lastname);
          contacts.add(contact);
       }
@@ -119,7 +113,6 @@ public class ContactHelper  extends HelperBase{
    }
 
    public Set<ContactData> all() {
-//      List<ContactData> contacts = new ArrayList<ContactData>();
       Set<ContactData> contacts = new HashSet<ContactData>();
       List<WebElement> elements = wd.findElements(By.name("entry"));
       for (WebElement element : elements) {
@@ -130,8 +123,7 @@ public class ContactHelper  extends HelperBase{
          contacts.add(con);
       }
       return contacts;
-
-//      return new HashSet<ContactData>();
    }
+
 }
 

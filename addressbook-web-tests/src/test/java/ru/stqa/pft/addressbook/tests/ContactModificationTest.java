@@ -7,6 +7,7 @@ import ru.stqa.pft.addressbook.model.ContactData;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by i.sokolov on 11.05.2016.
@@ -18,7 +19,7 @@ public class ContactModificationTest extends TestBase {
    @BeforeMethod
    public void ensurePrecondisions() {
       app.goTo().homePage();
-      if (app.сontact().list().size() == 0) {
+      if (app.сontact().all().size() == 0) {
          app.сontact().create(new ContactData().withFirstName("11111111"));
       }
    }
@@ -26,19 +27,20 @@ public class ContactModificationTest extends TestBase {
    @Test
    public void testContactModification() {
 
-      List<ContactData> before = app.сontact().list();
+      Set<ContactData> before = app.сontact().all();
+      ContactData modifyContact = before.iterator().next();
       int index = before.size();
-      ContactData contact = new ContactData().withId(before.get(before.size() - 1).
-              getId()).withFirstName("f222").withLastName("l2222");
-      app.сontact().modify(index, contact);
+      ContactData contact = new ContactData().withId(modifyContact
+              .getId())
+              .withFirstName("f222")
+              .withLastName("l2222");
+      app.сontact().modify(contact);
       
-      List<ContactData> after = app.сontact().list();
+      Set<ContactData> after = app.сontact().all();
       Assert.assertEquals(after.size(), before.size());
-      before.remove(before.size() - 1);
+
+      before.remove(modifyContact);
       before.add(contact);
-      Comparator<? super ContactData> byId = (o1, o2) -> Integer.compare(o1.getId(), o2.getId());
-      before.sort(byId);
-      after.sort(byId);
       Assert.assertEquals(before, after);
 
    }
