@@ -60,8 +60,7 @@ public class ContactHelper extends HelperBase {
 
    private void initContactModificationById(int id) {
       click(By.xpath("//td[@class='center' and preceding-sibling::td[@class='center']/input[@id=" + id + "]]/a/img[@title='Edit']"));
-//      click(By.xpath("(//img[@title='Edit'])[" + id + "]"));
-
+      //click(By.xpath("(//img[@title='Edit'])[" + id + "]"));
       //td[@class="center" and preceding-sibling::td[@class="center"]/input[@id="59"]]/a/img[@title="Edit"]
    }
 
@@ -119,5 +118,9 @@ public class ContactHelper extends HelperBase {
       return new Contacts(contactCache);
    }
 
+   public ContactData infoFromEditForm(ContactData contact) {
+      initContactModificationById(contact.getId());
+      return null;
+   }
 }
 

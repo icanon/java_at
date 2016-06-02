@@ -6,6 +6,11 @@ public class ContactData {
 
    private String firstName;
    private String lastName;
+   private String group;
+   private String homePhone;
+   private String mobilePhone;
+   private String workPhone;
+
    private String address;
    private String mobile;
    private String email;
