@@ -1,16 +1,14 @@
 package ru.stqa.pft.addressbook.tests;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 
-/**
- * Created on 02.06.2016.
- */
-public class ContactPhoneTests  extends TestBase{
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
+
+public class ContactPhoneTests  extends TestBase{
 
 
    @BeforeMethod
@@ -28,7 +26,13 @@ public class ContactPhoneTests  extends TestBase{
       ContactData contact = app.contact().all().iterator().next();
       ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
 
-      //tbody/tr/td/input[@id='61']/../../td[6]
-
+      assertThat(contact.getHomePhone(), equalTo(cleaned(contactInfoFromEditForm.getHomePhone())));
+      assertThat(contact.getMobile(), equalTo(cleaned(contactInfoFromEditForm.getMobile())));
+      assertThat(contact.getWorkPhone(), equalTo(cleaned(contactInfoFromEditForm.getWorkPhone())));
    }
+
+   public String cleaned(String phone) {
+      return phone.replaceAll("\\s", "").replaceAll("[-()]", "");
+   }
+
 }
