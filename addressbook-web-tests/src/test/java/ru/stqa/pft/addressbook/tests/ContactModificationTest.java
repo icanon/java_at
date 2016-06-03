@@ -34,7 +34,6 @@ public class ContactModificationTest extends TestBase {
       assertThat(after, equalTo(
               before.without(modifyContact).withAdded(contact)));
 
-
    }
 
 
