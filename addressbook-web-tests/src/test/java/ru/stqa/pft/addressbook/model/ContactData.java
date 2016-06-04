@@ -97,20 +97,20 @@ public class ContactData {
       return id;
    }
 
-   public String getAllEmail() {
-      return allEmail;
-   }
-
-
    public String getEmail2() {
       return email2;
    }
+
+
    public String getEmail3() {
       return email3;
    }
-
    public String getAllPhones() {
       return allPhones;
+   }
+
+   public String getAllEmail() {
+      return allEmail;
    }
 
    public String getFirstName() {

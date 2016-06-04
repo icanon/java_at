@@ -41,8 +41,8 @@ public class ContactHelper extends HelperBase {
       type(By.name("home"), contactData.getHomePhone());
       type(By.name("work"), contactData.getWorkPhone());
       type(By.name("email"), contactData.getEmail());
-      type(By.name("email2"), contactData.getEmail());
-      type(By.name("email3"), contactData.getEmail());
+      type(By.name("email2"), contactData.getEmail2());
+      type(By.name("email3"), contactData.getEmail3());
    }
 
    public void submitContactCreation() {
@@ -151,9 +151,13 @@ public class ContactHelper extends HelperBase {
               .withFirstName(firstName)
               .withLastName(lastName)
               .withAddress(address)
+              .withEmail(email)
+              .withEmail2(email2)
+              .withEmail3(email3)
               .withHomePhone(homePhone)
               .withMobile(mobile)
               .withWorkPhone(workPhone);
+
    }
 
    public ContactData infoFromViewForm(ContactData contact) {

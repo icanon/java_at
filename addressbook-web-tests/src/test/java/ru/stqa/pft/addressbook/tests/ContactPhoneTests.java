@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsInAnyOrder;
 
 
 public class ContactPhoneTests  extends TestBase{
@@ -29,7 +30,20 @@ public class ContactPhoneTests  extends TestBase{
       ContactData contact = app.contact().all().iterator().next();
       ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
 
-      assertThat(contact.getAllPhones(), equalTo(mergePhones(contactInfoFromEditForm)));
+      assertThat(Arrays.asList(contact.getAllPhones(), contact.getAllEmail(), contact.getAddress()),
+              containsInAnyOrder(equalTo(mergePhones(contactInfoFromEditForm)),
+                      equalTo(mergeEmail(contactInfoFromEditForm)), equalTo(contactInfoFromEditForm.getAddress())));
+
+      // assertThat(contact.getAllEmail(), equalTo(mergeEmail(contactInfoFromEditForm)));
+      // assertThat(contact.getAddress(), equalTo(contactInfoFromEditForm.getAddress()));
+   }
+
+
+   private String mergeEmail(ContactData contact) {
+      return Arrays.asList(contact.getEmail(), contact.getEmail2(), contact.getEmail3())
+              .stream().filter((s) -> ! s.equals(""))
+              .map(ContactPhoneTests::cleaned)
+              .collect(Collectors.joining("\n"));
    }
 
 
