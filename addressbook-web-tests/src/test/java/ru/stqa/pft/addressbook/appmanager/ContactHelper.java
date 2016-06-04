@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
+
 import java.util.List;
 
 
@@ -38,7 +39,10 @@ public class ContactHelper extends HelperBase {
       type(By.name("address"), contactData.getAddress());
       type(By.name("mobile"), contactData.getMobile());
       type(By.name("home"), contactData.getHomePhone());
+      type(By.name("work"), contactData.getWorkPhone());
       type(By.name("email"), contactData.getEmail());
+      type(By.name("email2"), contactData.getEmail());
+      type(By.name("email3"), contactData.getEmail());
    }
 
    public void submitContactCreation() {
@@ -113,25 +117,53 @@ public class ContactHelper extends HelperBase {
          String lastname = element.findElement(By.xpath("td[2]")).getText();
          String firstname = element.findElement(By.xpath("td[3]")).getText();
          int id = Integer.parseInt(element.findElement(By.xpath("*/input[@name='selected[]']")).getAttribute("value"));
-         String[] phones = element.findElement(By.xpath("td/input[@id='61']/../../td[6]")).getText().split("\n");
-         contactCache.add(new ContactData().withLastName(lastname).withFirstName(firstname).withId(id).withHomePhone(phones[0]).withMobile(phones[1]).withWorkPhone(phones[2]));
+         String allPhones = element.findElement(By.xpath("td/input[@id='" + id + "']/../../td[6]")).getText();
+         String allEmail = element.findElement(By.xpath("td/input[@id='" + id + "']/../../td[5]")).getText();
+         String address = element.findElement(By.xpath("td/input[@id='" + id + "']/../../td[4]")).getText();
+         contactCache.add(
+                 new ContactData()
+                         .withLastName(lastname)
+                         .withFirstName(firstname)
+                         .withId(id)
+                         .withAllPhones(allPhones)
+                         .withAddress(address)
+                         .withAllEmail(allEmail)
+         );
       }
       return new Contacts(contactCache);
    }
 
-         //tbody/tr/td/input[@id='61']/../../td[6]
 
    public ContactData infoFromEditForm(ContactData contact) {
       initContactModificationById(contact.getId());
       String firstName = wd.findElement(By.name("firstname")).getAttribute("value");
       String lastName = wd.findElement(By.name("lastname")).getAttribute("value");
+      String address = wd.findElement(By.name("address")).getAttribute("value");
+      String email = wd.findElement(By.name("email")).getAttribute("value");
+      String email2 = wd.findElement(By.name("email2")).getAttribute("value");
+      String email3 = wd.findElement(By.name("email3")).getAttribute("value");
       String homePhone = wd.findElement(By.name("home")).getAttribute("value");
       String mobile = wd.findElement(By.name("mobile")).getAttribute("value");
       String workPhone = wd.findElement(By.name("work")).getAttribute("value");
       wd.navigate().back();
 
-      return new ContactData().withId(contact.getId()).withFirstName(firstName).withLastName(lastName)
-              .withHomePhone(homePhone).withMobile(mobile).withWorkPhone(workPhone);
+      return new ContactData().withId(contact.getId())
+              .withFirstName(firstName)
+              .withLastName(lastName)
+              .withAddress(address)
+              .withHomePhone(homePhone)
+              .withMobile(mobile)
+              .withWorkPhone(workPhone);
    }
+
+   public ContactData infoFromViewForm(ContactData contact) {
+
+      //находит адрес и телефоны
+
+      //div[@id='content']/br/following-sibling::text()
+
+      return null;
+   }
+
 }
 

@@ -17,9 +17,11 @@ public class ContactCreationTest extends TestBase {
       ContactData contact = new ContactData()
               .withFirstName("111")
               .withLastName("last2")
-              .withAddress("765")
+              .withAddress("ул.Маршала жукова д64/2")
               .withEmail("tyut@ya.ru")
-              .withMobile("+765453234554");
+              .withHomePhone("889-99")
+              .withMobile("+765453234554")
+              .withWorkPhone("55 55");
       app.contact().create(contact);
 
       assertEquals(app.contact().count(), before.size() + 1);
