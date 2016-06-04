@@ -24,7 +24,7 @@ public class ContactPhoneTests  extends TestBase{
    }
 
 
-   @Test
+   @Test(enabled = false)
    public void testContactPhone() {
 
       ContactData contact = app.contact().all().iterator().next();
@@ -37,6 +37,20 @@ public class ContactPhoneTests  extends TestBase{
       // assertThat(contact.getAllEmail(), equalTo(mergeEmail(contactInfoFromEditForm)));
       // assertThat(contact.getAddress(), equalTo(contactInfoFromEditForm.getAddress()));
    }
+
+
+
+   @Test()
+   public void testViewPage() {
+
+      ContactData contact = app.contact().all().iterator().next();
+      ContactData contactInfoFromViewForm = app.contact().infoFromViewForm(contact);
+
+   }
+
+
+
+
 
 
    private String mergeEmail(ContactData contact) {

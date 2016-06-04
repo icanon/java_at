@@ -69,6 +69,11 @@ public class ContactHelper extends HelperBase {
       //td[@class="center" and preceding-sibling::td[@class="center"]/input[@id="59"]]/a/img[@title="Edit"]
    }
 
+   private void openContactViewModeById(int id) {
+      click(By.xpath("//a[contains(@href,'"+id+"')]/img[@title='Details']"));
+   }
+
+
    public void updateContactModification() {
 
       click(By.name("update"));
@@ -162,8 +167,16 @@ public class ContactHelper extends HelperBase {
 
    public ContactData infoFromViewForm(ContactData contact) {
 
-      //находит адрес и телефоны
+      openContactViewModeById(contact.getId());
+      String frstPlusLastName = wd.findElement(By.xpath("//div[@id='content']/b")).getText();
 
+
+
+      System.out.println(frstPlusLastName);
+
+
+
+      //находит адрес и телефоны
       //div[@id='content']/br/following-sibling::text()
 
       return null;
