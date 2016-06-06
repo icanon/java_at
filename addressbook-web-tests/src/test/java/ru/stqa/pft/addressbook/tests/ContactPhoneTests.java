@@ -38,10 +38,12 @@ public class ContactPhoneTests  extends TestBase{
 
 
 
-   @Test()
+   @Test(enabled = true)
    public void testViewPage() {
 
       ContactData contact = app.contact().all().iterator().next();
+      ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
+
       ContactData contactInfoFromViewForm = app.contact().infoFromViewForm(contact);
 
 
@@ -75,7 +77,6 @@ public class ContactPhoneTests  extends TestBase{
 
 
 //div[@id='content']/a[contains(@href,'mail')] находит email
-//div[@id='content']/b                          находим имя и фамилию
 
 //div[@id='content']/b/following-sibling::text()
 //div[@id='content']/a[contains(@href,'mail')]/preceding-sibling::text()[not(contains[text(),')'])]

@@ -24,15 +24,8 @@ public class ContactData {
 
 
 
-   public ContactData withEmail3(String email3) {
-      this.email3 = email3;
-      return this;
-   }
 
-   public ContactData withEmail2(String email2) {
-      this.email2 = email2;
-      return this;
-   }
+
 
    public ContactData withWorkPhone(String workPhone) {
       this.workPhone = workPhone;
@@ -54,7 +47,21 @@ public class ContactData {
       this.allEmail = allEmail;
       return this;
    }
+   public ContactData withEmail1(String email) {
+      this.email = email;
+      return this;
+   }
 
+
+   public ContactData withEmail2(String email2) {
+      this.email2 = email2;
+      return this;
+   }
+
+   public ContactData withEmail3(String email3) {
+      this.email3 = email3;
+      return this;
+   }
 
    public ContactData withGroup(String group) {
       this.group = group;
@@ -88,10 +95,6 @@ public class ContactData {
    }
 
 
-   public ContactData withEmail(String email) {
-      this.email = email;
-      return this;
-   }
 
    public int getId() {
       return id;

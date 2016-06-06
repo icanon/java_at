@@ -70,7 +70,7 @@ public class ContactHelper extends HelperBase {
    }
 
    private void openContactViewModeById(int id) {
-      click(By.xpath("//a[contains(@href,'"+id+"')]/img[@title='Details']"));
+      click(By.xpath("//a[contains(@href,'" + id + "')]/img[@title='Details']"));
    }
 
 
@@ -144,7 +144,7 @@ public class ContactHelper extends HelperBase {
       String firstName = wd.findElement(By.name("firstname")).getAttribute("value");
       String lastName = wd.findElement(By.name("lastname")).getAttribute("value");
       String address = wd.findElement(By.name("address")).getAttribute("value");
-      String email = wd.findElement(By.name("email")).getAttribute("value");
+      String email1 = wd.findElement(By.name("email")).getAttribute("value");
       String email2 = wd.findElement(By.name("email2")).getAttribute("value");
       String email3 = wd.findElement(By.name("email3")).getAttribute("value");
       String homePhone = wd.findElement(By.name("home")).getAttribute("value");
@@ -156,7 +156,7 @@ public class ContactHelper extends HelperBase {
               .withFirstName(firstName)
               .withLastName(lastName)
               .withAddress(address)
-              .withEmail(email)
+              .withEmail1(email1)
               .withEmail2(email2)
               .withEmail3(email3)
               .withHomePhone(homePhone)
@@ -165,14 +165,90 @@ public class ContactHelper extends HelperBase {
 
    }
 
+
+   public String fillTextName(String name, String index) {
+
+      String content = wd.findElement(By.xpath("//div[@id='content']")).getAttribute("innerHTML");
+      String[] parts = content.split("<br>");
+
+      for (int i=0; i<parts.length; i++) {
+         if (parts[i].matches("^"+index+": .*")) {
+            name = parts[i];
+            break;
+         }
+      }
+
+      return name;
+   }
+
+
    public ContactData infoFromViewForm(ContactData contact) {
 
       openContactViewModeById(contact.getId());
       String frstPlusLastName = wd.findElement(By.xpath("//div[@id='content']/b")).getText();
+      String emailOnViewForm = wd.findElement(By.xpath("//div[@id='content']/a[contains(@href,'mail')]")).getText();
 
 
 
+
+
+      String homePhone = fillTextName("homePhone","H");
+      String mobilePhone = fillTextName("mobilePhone","M");
+      String workPhone = fillTextName("workPhone","W");
+
+
+
+
+
+
+
+
+
+
+
+
+     /* for (int i=0; i<parts.length; i++) {
+         if (parts[i].matches("^H: .*")) {
+            homePhone = parts[i];
+            break;
+         }
+      }*/
+
+
+
+//part 0 = имя и фамилия
+      //
+//      String homePhone = wd.findElement(By.xpath("//div[@id='content']/b/following-sibling::text()[3][contains(text(),'')]")).getText();
+//      String mobilePhone = wd.findElement(By.xpath("(//div[@id='content']/b/following-sibling::text())[4]")).getText();
+//      String workPhone = wd.findElement(By.xpath("//div[@id='content']/b/following-sibling::text()[5]")).getText();
+
+//      String email1 = wd.findElement(By.xpath("//div[@id='content']/a[contains(@href,'mail')][1]")).getText();
+//      String email2 = wd.findElement(By.xpath("//div[@id='content']/a[contains(@href,'mail')][2]")).getText();
+//      String email3 = wd.findElement(By.xpath("//div[@id='content']/a[contains(@href,'mail')][3]")).getText();
+//      String address = wd.findElement(By.xpath("//div[@id='content']/b/following-sibling::text()[1]")).getText();
+
+
+
+
+      System.out.println();
+      System.out.println();
       System.out.println(frstPlusLastName);
+      System.out.println(emailOnViewForm);
+//      System.out.println(address);
+//      System.out.println(homePhone.length() > 0 ? homePhone : "Нету телефона");
+//      System.out.println(mobilePhone);
+//      System.out.println(workPhone);
+//      System.out.println(email1);
+//      System.out.println(email2);
+//      System.out.println(email3);
+      System.out.println();
+      System.out.println();
+
+      wd.navigate().back();
+
+
+
+
 
 
 

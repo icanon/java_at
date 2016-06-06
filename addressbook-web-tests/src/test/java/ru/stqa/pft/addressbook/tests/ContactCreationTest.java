@@ -18,7 +18,7 @@ public class ContactCreationTest extends TestBase {
               .withFirstName("111")
               .withLastName("last2")
               .withAddress("ул.Маршала жукова д64/2")
-              .withEmail("tyut@ya.ru")
+              .withEmail1("tyut@ya.ru")
               .withEmail2("jhj@34.ru")
               .withEmail3("56@h4.com")
               .withHomePhone("889-99")
