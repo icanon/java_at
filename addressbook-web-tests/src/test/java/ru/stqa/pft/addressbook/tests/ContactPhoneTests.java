@@ -22,7 +22,7 @@ public class ContactPhoneTests  extends TestBase{
    }
 
 
-   @Test(enabled = false)
+   @Test
    public void testContactPhone() {
 
       ContactData contact = app.contact().all().iterator().next();
@@ -38,7 +38,7 @@ public class ContactPhoneTests  extends TestBase{
 
 
 
-   @Test(enabled = true)
+   @Test
    public void testViewPage() {
 
       ContactData contact = app.contact().all().iterator().next();
@@ -46,15 +46,10 @@ public class ContactPhoneTests  extends TestBase{
       ContactData contactInfoFromViewForm = app.contact().infoFromViewForm(contact);
 
       assertThat(mergeEmail(contactInfoFromEditForm),equalTo(mergeEmail(contactInfoFromViewForm)));
+      assertThat(mergeFrstAndLastName(contactInfoFromEditForm),equalTo(contactInfoFromViewForm.getFirstName()));
       assertThat(mergePhones(contactInfoFromEditForm),equalTo(mergePhones(contactInfoFromViewForm)));
 
-
-
-
-
-
    }
-
 
 
 
@@ -65,25 +60,26 @@ public class ContactPhoneTests  extends TestBase{
               .collect(Collectors.joining("\n"));
    }
 
-
-
    private String mergePhones(ContactData contact) {
       return Arrays.asList(contact.getHomePhone(), contact.getMobile(), contact.getWorkPhone())
              .stream().filter((s) -> ! s.equals(""))
              .map(ContactPhoneTests::cleaned)
               .collect(Collectors.joining("\n"));
+   }
 
+   private String mergeFrstAndLastName(ContactData contact) {
+      return Arrays.asList(contact.getFirstName(), contact.getLastName())
+              .stream().filter((s) -> ! s.equals(""))
+              .map(ContactPhoneTests::cleanedName)
+              .collect(Collectors.joining(" "));
    }
 
    public static String cleaned(String phone) {
       return phone.replaceAll("\\s", "").replaceAll("[-()]", "").replaceAll("[:HWM]", "");
    }
 
+   public static String cleanedName(String name) {
+      return name.replaceAll("\\s", "");
+   }
+
 }
-
-
-//div[@id='content']/a[contains(@href,'mail')] находит email
-
-//div[@id='content']/b/following-sibling::text()
-//div[@id='content']/a[contains(@href,'mail')]/preceding-sibling::text()[not(contains[text(),')'])]
-//div[@id='content']/a[contains(@href,'mail')]/following-sibling::text()[not(contains[text(),')'])] находим скобки и пробелы

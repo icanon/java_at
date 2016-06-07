@@ -34,6 +34,7 @@ public class ContactHelper extends HelperBase {
    }
 
    public void fillContactForm(ContactData contactData) {
+      attach(By.name("photo"), contactData.getPhoto());
       type(By.name("firstname"), contactData.getFirstName());
       type(By.name("lastname"), contactData.getLastName());
       type(By.name("address"), contactData.getAddress());
@@ -176,7 +177,6 @@ public class ContactHelper extends HelperBase {
       String homePhone = getPhoneNumber("homePhone", "H");
       String mobilePhone = getPhoneNumber("mobilePhone", "M");
       String workPhone = getPhoneNumber("workPhone", "W");
-
       String address = getAddressViewForm();
       wd.navigate().back();
 
