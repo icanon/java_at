@@ -100,14 +100,8 @@ public class ContactData {
       return id;
    }
 
-   public String getEmail2() {
-      return email2;
-   }
 
 
-   public String getEmail3() {
-      return email3;
-   }
    public String getAllPhones() {
       return allPhones;
    }
@@ -128,8 +122,9 @@ public class ContactData {
       return group;
    }
 
-   public String getHomePhone() {
-      return homePhone;
+
+   public String getAddress() {
+      return address;
    }
 
    public String getWorkPhone() {
@@ -137,17 +132,30 @@ public class ContactData {
    }
 
 
-   public String getAddress() {
-      return address;
+   public String getHomePhone() {
+      return homePhone;
    }
+
 
    public String getMobile() {
       return mobile;
    }
 
+
+
    public String getEmail() {
       return email;
    }
+
+   public String getEmail3() {
+      return email3;
+   }
+
+   public String getEmail2() {
+      return email2;
+   }
+
+
 
 
    @Override

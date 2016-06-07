@@ -43,8 +43,14 @@ public class ContactPhoneTests  extends TestBase{
 
       ContactData contact = app.contact().all().iterator().next();
       ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
-
       ContactData contactInfoFromViewForm = app.contact().infoFromViewForm(contact);
+
+      assertThat(mergeEmail(contactInfoFromEditForm),equalTo(mergeEmail(contactInfoFromViewForm)));
+      assertThat(mergePhones(contactInfoFromEditForm),equalTo(mergePhones(contactInfoFromViewForm)));
+
+
+
+
 
 
    }
@@ -70,7 +76,7 @@ public class ContactPhoneTests  extends TestBase{
    }
 
    public static String cleaned(String phone) {
-      return phone.replaceAll("\\s", "").replaceAll("[-()]", "");
+      return phone.replaceAll("\\s", "").replaceAll("[-()]", "").replaceAll("[:HWM]", "");
    }
 
 }

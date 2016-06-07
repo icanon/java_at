@@ -165,8 +165,33 @@ public class ContactHelper extends HelperBase {
 
    }
 
+   public ContactData infoFromViewForm(ContactData contact) {
 
-   public String fillTextName(String name, String index) {
+      openContactViewModeById(contact.getId());
+      String frstPlusLastName = wd.findElement(By.xpath("//div[@id='content']/b")).getText();
+      String email1 = wd.findElement(By.xpath("//div[@id='content']/a[contains(@href,'mail')][1]")).getText();
+      String email2 = wd.findElement(By.xpath("//div[@id='content']/a[contains(@href,'mail')][2]")).getText();
+      String email3 = wd.findElement(By.xpath("//div[@id='content']/a[contains(@href,'mail')][3]")).getText();
+
+      String homePhone = getPhoneNumber("homePhone", "H");
+      String mobilePhone = getPhoneNumber("mobilePhone", "M");
+      String workPhone = getPhoneNumber("workPhone", "W");
+
+      String address = getAddressViewForm();
+      wd.navigate().back();
+
+      return  new ContactData().withId(contact.getId())
+              .withFirstName(frstPlusLastName)
+              .withAddress(address)
+              .withEmail1(email1)
+              .withEmail2(email2)
+              .withEmail3(email3)
+              .withHomePhone(homePhone)
+              .withMobile(mobilePhone)
+              .withWorkPhone(workPhone);
+   }
+
+   public String getPhoneNumber(String name, String index) {
 
       String content = wd.findElement(By.xpath("//div[@id='content']")).getAttribute("innerHTML");
       String[] parts = content.split("<br>");
@@ -177,86 +202,17 @@ public class ContactHelper extends HelperBase {
             break;
          }
       }
-
       return name;
    }
 
+   public String getAddressViewForm(){
+      String content = wd.findElement(By.xpath("//div[@id='content']")).getAttribute("innerHTML");
+      String [] parts = content.split("<br>");
+      return parts[1];
 
-   public ContactData infoFromViewForm(ContactData contact) {
-
-      openContactViewModeById(contact.getId());
-      String frstPlusLastName = wd.findElement(By.xpath("//div[@id='content']/b")).getText();
-      String emailOnViewForm = wd.findElement(By.xpath("//div[@id='content']/a[contains(@href,'mail')]")).getText();
-
-
-
-
-
-      String homePhone = fillTextName("homePhone","H");
-      String mobilePhone = fillTextName("mobilePhone","M");
-      String workPhone = fillTextName("workPhone","W");
-
-
-
-
-
-
-
-
-
-
-
-
-     /* for (int i=0; i<parts.length; i++) {
-         if (parts[i].matches("^H: .*")) {
-            homePhone = parts[i];
-            break;
-         }
-      }*/
-
-
-
-//part 0 = имя и фамилия
-      //
-//      String homePhone = wd.findElement(By.xpath("//div[@id='content']/b/following-sibling::text()[3][contains(text(),'')]")).getText();
-//      String mobilePhone = wd.findElement(By.xpath("(//div[@id='content']/b/following-sibling::text())[4]")).getText();
-//      String workPhone = wd.findElement(By.xpath("//div[@id='content']/b/following-sibling::text()[5]")).getText();
-
-//      String email1 = wd.findElement(By.xpath("//div[@id='content']/a[contains(@href,'mail')][1]")).getText();
-//      String email2 = wd.findElement(By.xpath("//div[@id='content']/a[contains(@href,'mail')][2]")).getText();
-//      String email3 = wd.findElement(By.xpath("//div[@id='content']/a[contains(@href,'mail')][3]")).getText();
-//      String address = wd.findElement(By.xpath("//div[@id='content']/b/following-sibling::text()[1]")).getText();
-
-
-
-
-      System.out.println();
-      System.out.println();
-      System.out.println(frstPlusLastName);
-      System.out.println(emailOnViewForm);
-//      System.out.println(address);
-//      System.out.println(homePhone.length() > 0 ? homePhone : "Нету телефона");
-//      System.out.println(mobilePhone);
-//      System.out.println(workPhone);
-//      System.out.println(email1);
-//      System.out.println(email2);
-//      System.out.println(email3);
-      System.out.println();
-      System.out.println();
-
-      wd.navigate().back();
-
-
-
-
-
-
-
-      //находит адрес и телефоны
-      //div[@id='content']/br/following-sibling::text()
-
-      return null;
    }
+
+
 
 }
 
